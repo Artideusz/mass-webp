@@ -12,7 +12,7 @@ if [ -d $1 ] ; then
     
     for i in "${files[@]}"
     do
-        FILE="${i%.*}.webp"
+        FILE="${i}.webp"
         if [ -f "${FILE}" ] ; then
             echo "${FILE} already exists. Skipping..."
         else
