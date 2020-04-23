@@ -1,7 +1,7 @@
 #!/bin/bash
 
-print_usage() {
-    printf "Usage: $0 <directory with images to convert to WebP>";
+function print_usage() {
+    echo "Usage: $0 <directory with images to convert to WebP>";
 }
 
 if [ -d $1 ] ; then
@@ -12,15 +12,14 @@ if [ -d $1 ] ; then
     
     for i in "${files[@]}"
     do
-        FILE="${i}.webp"
-        if [ -f FILE ] ; then
+        FILE="${i%.*}.webp"
+        if [ -f "${FILE}" ] ; then
             echo "${FILE} already exists. Skipping..."
         else
             echo "${FILE} does not exist! Creating a webp image!"
-            cwebp $i -o $FILE
+            cwebp "$i" -o "$FILE" > /dev/null 2>&1
         fi
     done
-
 else
     print_usage
     exit 1
